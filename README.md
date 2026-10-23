@@ -45,3 +45,14 @@ Python (Faker + pandas) -> PostgreSQL у Docker (схема `raw`)
 ## Стек
 
 Python, pandas, Faker, SQLAlchemy, PostgreSQL 15, Docker
+
+## ЛР2: dbt-проєкт `ecommerce_dbt`
+
+Трансформація сирих даних авіакомпанії (схема `raw`) у зіркову схему (схема `analytics`).
+
+- `models/staging/` — очищення (views): `stg_passengers`, `stg_flights`, `stg_airports`, `stg_bookings`
+- `models/marts/` — вітрини (tables): `dim_passengers`, `dim_flights`, `fct_bookings`
+- `fct_bookings` містить обчислювану метрику `price_per_hour`
+
+Запуск: з папки `ecommerce_dbt` виконати `export DBT_PROFILES_DIR=.`, потім `dbt run`.
+`profiles.yml` у репозиторії не зберігається (містить пароль).

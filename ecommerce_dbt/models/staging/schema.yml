@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: stg_passengers
+    columns:
+      - name: passenger_id
+        tests:
+          - unique
+          - not_null

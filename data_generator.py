@@ -25,7 +25,7 @@ def generate_airports(num=20):
     return pd.DataFrame(rows)
 
 
-def generate_passengers(num=1000):
+def generate_passengers(num=5000):
     rows = []
     for i in range(1, num + 1):
         rows.append({
@@ -42,7 +42,7 @@ def generate_passengers(num=1000):
     return pd.concat([df, duplicates], ignore_index=True)
 
 
-def generate_flights(airports_df, num=200):
+def generate_flights(airports_df, num=1000):
     airport_ids = airports_df["airport_id"].tolist()
     rows = []
     for i in range(1, num + 1):
@@ -79,7 +79,7 @@ def generate_bookings(passengers_df, flights_df, num=5000):
     return pd.DataFrame(rows)
 
 
-def generate_baggage_claims(bookings_df, num=300):
+def generate_baggage_claims(bookings_df, num=5000):
     booking_ids = bookings_df["booking_id"].tolist()
     rows = []
     for i in range(1, num + 1):
@@ -102,7 +102,7 @@ def load_data_to_dwh(tables):
         conn.commit()
     for name, df in tables.items():
         print(f"Завантаження {name} ({len(df)} рядків)...")
-        # replace = повне перезавантаження, тому скрипт можна запускати повторно
+        # replace = повне перезавантаження
         df.to_sql(name, engine, schema="raw", if_exists="replace", index=False)
     print("Дані успішно завантажені у схему 'raw'!")
 

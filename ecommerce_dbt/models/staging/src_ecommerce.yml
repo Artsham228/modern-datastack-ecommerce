@@ -1,0 +1,10 @@
+version: 2
+sources:
+  - name: raw_ecommerce
+    schema: raw
+    tables:
+      - name: passengers
+      - name: airports
+      - name: flights
+      - name: bookings
+      - name: baggage_claims

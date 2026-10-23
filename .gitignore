@@ -1,2 +1,7 @@
 venv/
 __pycache__/
+ecommerce_dbt/profiles.yml
+ecommerce_dbt/target/
+ecommerce_dbt/logs/
+logs/
+ecommerce_dbt/.user.yml
