@@ -2,8 +2,10 @@ version: 2
 
 models:
   - name: stg_passengers
+    description: "Очищені дані пасажирів"
     columns:
       - name: passenger_id
+        description: "Унікальний ідентифікатор пасажира"
         tests:
           - unique
           - not_null
