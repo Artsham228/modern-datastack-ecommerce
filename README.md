@@ -63,3 +63,15 @@ DAG `airline_elt_pipeline` запускається щодня і складає
 `extract_and_load_raw_data` → `dbt_run_transformations` → `dbt_test_quality_gate`.
 
 ![Airflow Graph](images/airflow_graph.png)
+
+## Лабораторна №4: Бізнес-аналітика та візуалізація (Metabase)
+
+Для візуалізації даних зі сховища `ecommerce_dwh` (схема `analytics`) у Docker-інфраструктуру додано сервіс `metabase` зі збереженням конфігурації у том `metabase_data`.
+
+Побудовано аналітичні графіки та об'єднано їх у дашборд:
+* **Динаміка бронювань** — лінійний графік кількості бронювань (`fct_bookings`) з групуванням по місяцях.
+* **Топ-5 пасажирів за бронюваннями** — стовпчикова діаграма, побудована через `JOIN` таблиці фактів `fct_bookings` та виміру `dim_passengers`.
+
+![Динаміка бронювань](images/metabase_chart1.png)
+
+![Metabase Dashboard](images/metabase_dashboard.png)
