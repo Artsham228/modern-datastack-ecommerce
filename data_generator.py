@@ -97,17 +97,17 @@ def generate_baggage_claims(bookings_df, num=5000):
 # ---------- ЗАВАНТАЖЕННЯ В DWH ----------
 def load_data_to_dwh(tables):
     engine = create_engine(DB_URL)
-    with engine.connect() as conn:
+    with engine.begin() as conn:
         conn.execute(text("CREATE SCHEMA IF NOT EXISTS raw;"))
-        conn.commit()
-    for name, df in tables.items():
-        print(f"Завантаження {name} ({len(df)} рядків)...")
-        # replace = повне перезавантаження
+        for name, df in tables.items():
+            print(f"Завантаження {name} ({len(df)} рядків)...")
+        with engine.begin() as conn:
+            conn.execute(text(f"DROP TABLE IF EXISTS raw.{name} CASCADE;"))
         df.to_sql(name, engine, schema="raw", if_exists="replace", index=False)
     print("Дані успішно завантажені у схему 'raw'!")
 
 
-if __name__ == "__main__":
+def generate_and_load():
     df_airports = generate_airports()
     df_passengers = generate_passengers()
     df_flights = generate_flights(df_airports)
@@ -121,3 +121,7 @@ if __name__ == "__main__":
         "bookings": df_bookings,
         "baggage_claims": df_claims,
     })
+
+
+if __name__ == "__main__":
+    generate_and_load()

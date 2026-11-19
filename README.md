@@ -56,3 +56,10 @@ Python, pandas, Faker, SQLAlchemy, PostgreSQL 15, Docker
 
 Запуск: з папки `ecommerce_dbt` виконати `export DBT_PROFILES_DIR=.`, потім `dbt run`.
 `profiles.yml` у репозиторії не зберігається (містить пароль).
+
+## Лабораторна №3: Оркестрація (Airflow)
+
+DAG `airline_elt_pipeline` запускається щодня і складається з трьох тасків:
+`extract_and_load_raw_data` → `dbt_run_transformations` → `dbt_test_quality_gate`.
+
+![Airflow Graph](images/airflow_graph.png)
